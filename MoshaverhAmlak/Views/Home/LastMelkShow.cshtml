@@ -1,0 +1,55 @@
+﻿
+@using MoshaverDataLayer.Model;
+@model   IEnumerable<MoshaverDataLayer.Model.Melk>
+
+
+
+<div id="productGroupsList">
+    @Html.Partial("_LastMelkShow2", Model )
+</div>
+<style>
+    .pagep1 {
+        display: inline-block;
+        margin-top: 50px;
+        margin-right: 0;
+    }
+
+        .pagep1 a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color .3s;
+            border: 1px solid #ddd;
+        }
+
+            .pagep1 a.active {
+                background-color: darkgray;
+                color: blue;
+                border: 1px solid #4CAF50;
+            }
+
+            .pagep1 a:hover:not(.active) {
+                background-color: darkgray;
+            }
+</style>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("click", "#contentPager a[href]", function () {
+                $.ajax({
+                    url: $(this).attr("href"),
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#productGroupsList').html(result);
+                    }
+                });
+                return false;
+            });
+
+
+
+        });
+</script>

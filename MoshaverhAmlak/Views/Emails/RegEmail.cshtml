@@ -1,0 +1,23 @@
+﻿To: @ViewBag.To
+
+From: <InfoMoshaverehAmlak@gmail.com>
+    Subject: @ViewBag.Title
+
+
+    @{ Layout = null; }
+    <div style="background: rgba(243, 215, 82, 0.50);padding: 25px;">
+
+        <div style="font-family: Tahoma;text-align: right;direction: rtl;font-size: 90%;
+color: #808080;
+line-height: 2.5em;">
+            @*@Html.EmbedImage("~/images/home/logo.png")*@
+            <div style="font-weight: bold"></div> @ViewBag.body<br />
+            @if (!String.IsNullOrEmpty(ViewBag.link))
+            {
+                <div style="text-align: center;font-weight: bold;text-decoration:none">
+                    <a href="@ViewBag.link">اینجا را کلیک کنید</a>
+                </div>
+            }
+        </div>
+    </div>
+

@@ -1,0 +1,52 @@
+﻿@model  IEnumerable<MoshaverDataLayer.Model.Melk>
+@using MoshaverDataLayer.Context;
+@{
+    ViewBag.Title = "_LastMelkShow";
+    UnitOfWork db = new UnitOfWork();
+}
+
+<div id="featured-properties">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block-heading">
+                    <h4><span class="heading-icon"><i class="fa fa-star"></i></span>املاک ویژه</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <ul class="owl-carousel owl-alt-controls" data-autoplay="no" data-pagination="no" data-arrows="yes">
+                  
+                    @foreach (var item in Model)
+                    {
+                        <li class="item property-block">
+                            <a href="/Home/Melk/@item.Id" class="property-featured-image">
+                                @if (item.ImgL != null)
+                                {
+                                    <img src="~/Content/images/Melks/@item.ImgL" style="height:218.66px;width:328px" alt="">
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/Melks/@item.ImgS" style="height:218.66px;width:328px" alt="">
+                                }
+
+                                <span class="~/Content/images-count"><i class="fa fa-picture-o"></i> 2</span>
+                                <span class="badges">@db.TypeMelkRepository.GetAll(x => x.Id == item.typeMelkId).FirstOrDefault().typemelkname</span>
+                            </a>
+                            <div class="property-info">
+                                <h4><a href="/Home/Melk/@item.Id">@item.Title</a></h4>
+                                <span class="location">@db.CityRepository.GetAll(x => x.Id == item.cityId).FirstOrDefault().cityname  _  @db.TypeMahdodeRepository.GetAll(x => x.Id == item.typeMahdodeId).FirstOrDefault().typemahdodename</span>
+                                <div class="price">@item.PriceAll.ToString("#,0 تومان")</div>
+                            </div>
+                        </li>
+                    }
+                   
+           
+                
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

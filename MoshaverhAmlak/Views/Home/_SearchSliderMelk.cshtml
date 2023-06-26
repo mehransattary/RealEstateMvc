@@ -1,0 +1,30 @@
+﻿
+
+
+@using (Html.BeginForm("SearchSlider", "Home", FormMethod.Post))
+{
+
+    <div class="form-group">
+
+        <div class="col-md-12">
+            @Html.DropDownList("typemelk", null, "دسته بندی...", htmlAttributes: new { @class = "form-control input-lg selectpicker" })
+
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="col-md-12">
+            @Html.DropDownList("typeMahdodeId", null, "محدوده...", htmlAttributes: new { @class = "form-control input-lg selectpicker " })
+       
+        </div>
+    </div>
+    
+    <div class="form-group">
+
+        <div class="col-md-12">
+            @Html.DropDownList("typecustumerId", null, "نوع ملک...", htmlAttributes: new { @class = "form-control input-lg selectpicker " })
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-search"></i> جستجو</button>
+}
+

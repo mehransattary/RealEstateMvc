@@ -1,0 +1,61 @@
+﻿@model MoshaverDataLayer.ViewModel.SearchViewModel
+@using MoshaverDataLayer.Context;
+@{
+    ViewBag.Title = " جستجو";
+    Layout = null;
+    UnitOfWork db = new UnitOfWork();
+}
+   <!-- Site Search Module -->
+<div class="site-search-module">
+    <div class="container">
+        <div class="site-search-module-inside">
+       
+            @using (Html.BeginForm("SearchSlider", "Home", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">                           
+                          
+                                @Html.DropDownList("typemelk", null, "دسته بندی...", htmlAttributes: new { @class = "form-control input-lg selectpicker" })
+                            
+                        </div>
+                        <div class="col-md-3">                         
+                       
+                                @Html.DropDownList("typeMahdodeId", null, "محدوده...", htmlAttributes: new { @class = "form-control input-lg selectpicker " })
+
+                        </div>
+                        <div class="col-md-3">
+                       
+                                @Html.DropDownList("typecustumerId", null, "نوع ملک...", htmlAttributes: new { @class = "form-control input-lg selectpicker " })
+
+                        </div>
+                        <div class="col-md-2"> <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa fa-search"></i> جستجو</button> </div>
+                        <div class="col-md-2"> <a href="#" id="ads-trigger" class="btn btn-default btn-block"><i class="fa fa-plus"></i> <span>پیشرفته</span></a> </div>
+                    </div>
+                    <div class="row hidden-xs hidden-sm">
+                  
+                        <div class="col-md-2">
+                            <label>حداقل قیمت (تومان)</label>
+                            <input type="text" class="form-control input-lg" name="PriceFirst" placeholder="همه">
+                        </div>
+                        <div class="col-md-2">
+                            <label>حداکثر قیمت (تومان)</label>
+                            <input type="text" class="form-control input-lg" name="PriceEnd" placeholder="همه">
+                        </div>
+                        <div class="col-md-2">
+                            <label>حداقل متراژ</label>
+                            <input type="text" class="form-control input-lg" name="MinMeter" placeholder="همه">
+                        </div>
+                        <div class="col-md-2">
+                            <label>حداکثر متراژ</label>
+                            <input type="text" class="form-control input-lg" name="MaxMeter" placeholder="همه">
+                        </div>
+                    </div>
+                </div>
+
+            }
+          
+ 
+        </div>
+    </div>
+</div>

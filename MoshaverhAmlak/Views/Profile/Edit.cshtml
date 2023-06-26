@@ -1,0 +1,316 @@
+﻿@model MoshaverDataLayer.Model.Melk
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<link href="~/Areas/Admin/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" />
+<style>
+    .row .col-lg-6 .form-group .col-md-10 {
+        margin-top: 7px;
+    }
+</style>
+<div class="site-showcase">
+    <!-- Start Page Header -->
+    <div class="parallax page-header" style="background-image:url(/Content/images/page-header1.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>افزودن ملک</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+</div>
+
+<div class="container"style="box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .8);padding: 20px 20px; margin-bottom: 20px; margin-top: 20px;">
+    <a href="/Profile/ShowMelk" class="btn btn-danger btn-rounded w-md waves-effect waves-light m-b-5" style="margin-bottom:5px;">بازگشت <i class="fa fa-backward"></i></a>
+    <div class="row ">
+        <div class="col-sm-12">
+            <div class="card-box" style="margin-top :50px;">
+
+
+
+                <h4 class="header-title m-t-0 m-b-30">افزودن ملک</h4>
+                @using (Html.BeginForm("Edit", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("شهر", htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("cityId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.cityId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("نوع قرارداد", htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("typeGardadId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.typeGardadId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("محدوده", htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("typeMahdodeId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.typeMahdodeId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("ملک", htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("typeMelkId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.typeMelkId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                        </div><!-- end col -->
+
+                        <div class="col-lg-6">
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TypeEskelet, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.TypeEskelet, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TypeEskelet, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Meter, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Meter, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Meter, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Zirbana, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Zirbana, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Zirbana, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PriceMeter, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.PriceMeter, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PriceMeter, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.locationSN, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.locationSN, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.locationSN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div><!-- end col -->
+
+                    </div><!-- end row -->
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                @Html.Label("نوع سند", htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("typeSanadId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.typeSanadId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.Label("نوع مشتری", htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("typecustumerId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.typecustumerId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.typeEmkanatId, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.typeEmkanatId, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.typeEmkanatId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GedmatSakht, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.GedmatSakht, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.GedmatSakht, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div><!-- end col -->
+
+                        <div class="col-lg-6">
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CountTabagat, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CountTabagat, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CountTabagat, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NumberTabage, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.NumberTabage, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NumberTabage, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NumberVahed, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.NumberVahed, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NumberVahed, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.addressId, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.addressId, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.addressId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+
+                    </div><!-- end row -->
+                    <div class="row">
+                        <div class="col-lg-6">
+
+                            @*<div class="form-group">
+                                    @Html.Label("تصویرجاری", htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                    <div class="col-md-10">
+
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PriceAll, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.PriceAll, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PriceAll, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Rooms, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Rooms, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Rooms, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Wc, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Wc, new { htmlAttributes = new { @class = "form-control", min = 1 } })
+                                    @Html.ValidationMessageFor(model => model.Wc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SpecialAmlak, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(x => x.SpecialAmlak)
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IsShow, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(x => x.IsShow)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="ذخیره" class="btn btn-success btn-block" style="margin-top:5px" />
+                                </div>
+
+
+
+
+                            </div><!-- end col -->
+                        </div><!-- end col -->
+                        <div class="col-lg-6">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ImgB, htmlAttributes: new { @class = "control-label col-md-2", style = " margin-top:7px;" })
+                                @Html.HiddenFor(x => x.ImgB)
+
+                                <div class="col-md-10">
+                                    <div class="card-box">
+                                        @Html.HiddenFor(model => model.ImgL)
+                                        <img src="~/Content/images/Melks/@Model.ImgL" alt="تصویرملک" width="350" height="150" class="img-responsive" />
+                                        <div class="dropify-loader" style="display: none;"></div>
+                                        <div class="dropify-errors-container"><ul></ul></div>
+                                        <input type="file" name="file" class="dropify" data-max-file-size="1M">
+                                        <div class="dropify-preview" style="display: none;height:120px;"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner">soroush-logo.png</span></p><p class="dropify-infos-message">برای جایگزینی فایل را به اینجا بکشید یا کلیک کنید</p></div></div></div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div><!-- end row -->
+
+                }
+            </div>
+        </div><!-- end col -->
+    </div>
+
+</div>
+
+@section scripts{
+    <script src="~/Areas/Admin/assets/plugins/fileuploads/js/dropify.min.js"></script>
+    <script type="text/javascript">
+    $('.dropify').dropify({
+        messages: {
+            'default': 'فایل را به اینجا بکشید یا کلیک کنید',
+            'replace': 'برای جایگزینی فایل را به اینجا بکشید یا کلیک کنید',
+            'remove': 'پاک کردن',
+            'error': 'با پوزش فراوان، خطایی رخ داده'
+        },
+        error: {
+            'fileSize': 'حجم فایل بیشتر از حد مجاز است (1M).'
+        }
+    });
+    </script>
+
+
+
+
+}

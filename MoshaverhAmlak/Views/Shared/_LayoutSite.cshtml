@@ -1,0 +1,273 @@
+﻿
+@using MoshaverDataLayer.Context;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using MoshaverhAmlak.Models;
+@{  
+    Layout = null;
+    UnitOfWork db = new UnitOfWork();
+ 
+    var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+    var role = rm.FindByName("admin");
+    bool result = User.IsInRole(role.Name);
+}
+
+<!DOCTYPE html>
+
+@*<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+    </html>*@
+<html class="no-js">
+<head>
+    <!-- Basic Page Needs
+    ================================================== -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>مشاوراملاک</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <!-- Mobile Specific Metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <!-- CSS
+    ================================================== -->
+    @Styles.Render("~/Content/mycss")
+    <!-- SCRIPTS
+    ================================================== -->
+    <script src="~/Content/js/modernizr.js"></script><!-- Modernizr -->
+    <link href="~/Content/alertifyjs/alertify.rtl.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.rtl.min.css" rel="stylesheet" />
+    <!-- FAVICON
+    ================================================== -->
+    <link rel="shortcut icon" type="image/png" href="~/Content/images/favicon.png" />
+</head>
+<body class="home">
+    <div class="body">
+        <!-- Start Site Header -->
+        <header class="site-header">
+            <div class="top-header hidden-xs">
+                <div class="container-fluid">
+                    <div class="row ">
+                        <div class="col-md-7 col-sm-6 ">
+
+                            @using Microsoft.AspNet.Identity
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <ul class="nav navbar-nav navbar-right">
+                                        @if (result == true)
+                                        {
+                                        <li style="margin-top:0px;">
+                                            <div style="margin-top:0px;">  @Html.ActionLink("سلام " +"مدیرمحترم"+" "+ User.Identity.GetUserName() + "!", "Index", "Melks", new { Area = "Admin" }, htmlAttributes: new { title = "Manage" })</div>
+                                        </li>
+                                        <li>
+                                            <div style="margin-top:0px;margin-right: 35px;"> <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i>خروج</a></div>
+                                        </li>
+                                        }
+                                        else
+                                        {
+                                            <li style="margin-top:0px;">
+                                                <div style="margin-top:0px;">  @Html.ActionLink("سلام " + "کاربرمحترم" + " " + User.Identity.GetUserName() + "!", "ShowMelk", "Profile", routeValues: null, htmlAttributes: new { title = "Manage" })</div>
+                                            </li>
+                                            <li>
+                                                <div style="margin-top:0px;margin-right: 35px;"> <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out"></i>خروج</a></div>
+                                            </li>
+
+                                        }
+
+                                    </ul>
+                                }
+                            }
+
+                            <ul class="horiz-nav pull-left ">
+
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                 
+
+                                    if (result == true)
+                                    {
+                                        <li class="dropdown">
+                                            <a data-toggle="dropdown"><i class="fa fa-user"></i> ورود <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/Admin/Melks/index"> پروفایل مدیریت</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="dropdown">
+                                            <a data-toggle="dropdown"><i class="fa fa-user"></i> ورود <b class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/Profile/ShowMelk">املاک من</a></li>
+                                                <li><a href="/Home/InsertMelk">افزودن ملک</a></li>
+                                                <li><a href="/Manage/ChangePassword">تغییررمزعبور</a></li>
+                                            </ul>
+                                        </li>
+
+                                    }
+
+                                }
+                                else
+                                {
+                                    <li class="dropdown">
+                                        <a href="/Account/Login"><i class="fa fa-user"></i> ورود <b class="caret"></b></a>
+                                    </li>
+                                }
+
+
+                                <li><a href="/Account/Register"><i class="fa fa-check-circle"></i> ثبت نام</a></li>
+                                <li>
+                                    @{
+                                        if (!string.IsNullOrEmpty(Session["userName"] as string))
+                                        {
+                                            <label>@Session["userName"].ToString()</label>
+                                        }
+                                        else
+                                        {
+                                            <label></label>
+                                        }
+                                    }
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <div class="col-md-5 col-sm-6">
+                            <ul class="horiz-nav pull-right">
+                                @foreach (var item in db.SocialRepository.GetAll())
+                                {
+                                    <li><a href=@item.SocialLink target="_blank"><img src="/Content/images/social/@item.SocialIcon" style="border-radius:50%;width:16px;height:16px;" /></a></li>
+                                    @*<li><a href=@item.SocialLink target="_blank" style="height:40px;width:40px;"></a></li>*@
+                                }
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (db.SettingRepository.GetAll().Count() != 0)
+            {
+                @Html.Action("TopMenu", "Home")
+            }
+
+            @Html.Action("Menu", "Home")
+        </header>
+        <!-- End Site Header -->
+        @RenderBody()
+
+        <!-- Start Site Footer -->
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 footer-widget widget">
+                        <h3 class="widgettitle">اطلاعات</h3>
+                        <ul>
+                            <li><a href="/Account/Login">ورود</a></li>
+                            <li><a href="/Account/Register">ثبت نام</a></li>
+                            <li><a href="/Account/ForgotPassword">فراموشی رمزعبور</a></li>
+                            <li><a href="/Home/About">درباره ما</a></li>
+                            <li><a href="/Home/Contact">تماس باما</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 footer-widget widget">
+                        <h3 class="widgettitle">لینک های مفید</h3>
+                        <ul>
+                            <li><a href="/Home/InsertMelk">ملک خود را ثبت کنید</a></li>
+                            <li><a href="/Home/MelkAllShowList">مشاهده ملک ها</a></li>
+                            @if (db.SettingRepository.GetAll().Count() != 0)
+                            {
+                                <li>تلفن :  @db.SettingRepository.GetAll(x => x.Id != 0).FirstOrDefault().TellPhone1</li>
+                                <li> ایمیل:  @db.SettingRepository.GetAll(x => x.Id != 0).FirstOrDefault().EmailStore1</li>
+                                    <li>آدرس :  @db.SettingRepository.GetAll(x => x.Id != 0).FirstOrDefault().AddressStore1</li>
+                            }
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+        @Html.Action("SicialShow", "Home")
+        }
+
+        <!-- End Site Footer -->
+        <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>
+    </div>
+    @Scripts.Render("~/Content/myjs")
+    @RenderSection("scripts", false)
+    <script src="~/Scripts/alertify.min.js"></script>
+
+
+
+
+    @*<div class="styleswitcher visible-lg visible-md">
+            <div class="arrow-box"><a class="switch-button"><span class="fa fa-cogs fa-lg"></span></a> </div>
+            <h4>رنگ بندی ها</h4>
+            <ul class="color-scheme">
+                <li><a href="#" data-rel="../Content/colors/color1.css" class="color1" title="color1"></a></li>
+                <li><a href="#" data-rel="../Content/colors/color2.css" class="color2" title="color2"></a></li>
+                <li><a href="#" data-rel="../Content/colors/color3.css" class="color3" title="color3"></a></li>
+                <li><a href="#" data-rel="../Content/colors/color4.css" class="color4" title="color4"></a></li>
+                <li><a href="#" data-rel="../Content/colors/color5.css" class="color5" title="color5"></a></li>
+                <li class="nomargin"><a href="#" data-rel="../Content/colors/color6.css" class="color6" title="color6"></a></li>
+                <li class="nomargin"><a href="#" data-rel="../Content/colors/color7.css" class="color7" title="color7"></a></li>
+                <li class="nomargin"><a href="#" data-rel="../Content/colors/color8.css" class="color8" title="color8"></a></li>
+                <li class="nomargin"><a href="#" data-rel="../Content/colors/color9.css" class="color9" title="color9"></a></li>
+                <li class="nomargin"><a href="#" data-rel="../Content/colors/color10.css" class="color10" title="color10"></a></li>
+            </ul>
+            <h4>طرح بندی</h4>
+            <ul class="layouts">
+                <li class="wide-layout"><a href="#" title="تمام عرض">تمام عرض</a></li>
+                <li class="boxed-layout"><a href="#" title="چهارچوب">چهارچوب</a></li>
+            </ul>
+            <h4>انتخاب فونت</h4>
+            <ul class="fonts">
+                <li class="vazir-font"><a href="#" data-rel="../Content/css/style.css" title="وزیر">وزیر</a></li>
+                <li class="myriad-font"><a href="#" data-rel="../Content/css/style-myriad.css" title="میریاد">میریاد</a></li>
+            </ul>
+            <h4>الگوی زمینه</h4>
+            <ul class="background-selector">
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt1.png" data-nr="0" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt2.png" data-nr="1" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt3.png" data-nr="2" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt4.png" data-nr="3" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt5.png" data-nr="4" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt6.png" data-nr="5" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt7.png" data-nr="6" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt8.png" data-nr="7" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt9.png" data-nr="8" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt10.png" data-nr="9" width="20" height="20"></li>
+                <li class="nomargin"><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt11.jpg" data-nr="10" width="20" height="20"></li>
+                <li class="nomargin"><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt12.jpg" data-nr="11" width="20" height="20"></li>
+                <li class="nomargin"><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt13.jpg" data-nr="12" width="20" height="20"></li>
+                <li class="nomargin"><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt14.jpg" data-nr="13" width="20" height="20"></li>
+                <li class="nomargin"><img alt="" src="~/Content/style-switcher/backgrounds/patterns/pt15.jpg" data-nr="14" width="20" height="20"></li>
+            </ul>
+            <small>* مناسب طرح چهارچوب</small>
+            <h4>تصویر زمینه</h4>
+            <ul class="background-selector1">
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/images/img1-thumb.jpg" data-nr="0" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/images/img2-thumb.jpg" data-nr="1" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/images/img3-thumb.jpg" data-nr="2" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/images/img4-thumb.jpg" data-nr="3" width="20" height="20"></li>
+                <li><img alt="" src="~/Content/style-switcher/backgrounds/images/img5-thumb.jpg" data-nr="4" width="20" height="20"></li>
+            </ul>
+            <small>* مناسب طرح چهارچوب</small>
+        </div>*@
+</body>
+</html>
+
+

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<  MoshaverDataLayer.Model.Menu>
+@using MoshaverDataLayer.Model;
+@using MoshaverDataLayer.Context;
+@{
+
+    UnitOfWork db = new UnitOfWork();
+  
+
+}
+<div class="main-menu-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navigation">
+                    <ul class="sf-menu">
+                  
+                        <li><a href="/">صفحه اصلی</a></li>
+                        <li><a href="/Home/About">درباره ما</a></li>
+                        <li><a href="/Home/Contact">تماس با ما</a></li>
+                        <li><a href="/Home/InsertMelk">ثبت ملک</a></li>
+                       @foreach (var item in Model)
+                       {
+                           var zirmenu = db.ZirMenuRepository.GetAll(x => x.MenuId == item.Id);
+                        <li>
+                            <a href="javascript:;">@item.MenuName</a>
+                            <ul class="dropdown">
+                            
+                                @if (item.IsMenuItems == true)
+                                {
+                                    foreach (var item1 in zirmenu)
+                                    {
+                                        var itemmenu = db.ItemMenuRepository.GetAll(x=>x.ZirmenuId==item1.Id);
+                                      
+                                        if (item1.Isitems == true)
+                                        {  <li>
+                                            <a href="javascript:;">@item1.zirMenuName</a>                                          
+                                              <ul>
+                                                  @foreach (var item2 in itemmenu)
+                                                  {
+                                                    <li><a href="/Home/ShowItemmenu/?id=@item2.ItemNameId&zirMenuNameId=@item1.zirMenuNameId">@item2.ItemName</a></li>
+                                                  }                                             
+                                              
+                                              </ul>
+                                          </li>
+                                        }
+                                        else
+                                        {
+                                          
+                                                
+                                         
+                                            <li><a href="/Home/ShowZirMenu/@item1.zirMenuNameId">@item1.zirMenuName</a></li>
+                                        
+                                        }
+
+
+                                    }
+
+                                }
+                               
+                           
+                            </ul>
+                        </li>
+                       }
+                    
+                       
+                
+      
+               
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

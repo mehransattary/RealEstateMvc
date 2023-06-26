@@ -1,0 +1,36 @@
+﻿@model  IEnumerable< MoshaverDataLayer.Model.Melk>
+@using MoshaverDataLayer.Model;
+@{
+    ViewBag.Title = "ShowMelk";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+
+<div id="MelkAllShowuser">
+    @Html.Partial("_ShowMelk", Model)
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+@section scripts {
+<script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("click", "#contentPager a[href]", function () {
+                $.ajax({
+                    url: $(this).attr("href"),
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#MelkAllShowuser').html(result);
+                    }
+                });
+                return false;
+            });
+
+
+
+        });
+</script>
+    }
+
+

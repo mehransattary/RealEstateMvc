@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "تایید آدرس ایمیل";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<section id="form">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-sm-offset-1">
+
+                <h3>@ViewBag.Title.</h3>
+                <div class="alert alert-success">
+                    <p>
+                        با تشکر از شما کاربر گرامی لطفا @Html.ActionLink("برای ورود کلیک کنید", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

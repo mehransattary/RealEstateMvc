@@ -1,0 +1,145 @@
+﻿@model PagedList.IPagedList<MoshaverDataLayer.Model.Melk>
+@using PagedList.Mvc
+@using MoshaverDataLayer.Context;
+@{   
+    UnitOfWork db = new UnitOfWork();
+}
+
+
+
+
+<div class="container" id="some_grid_container">
+    <div class="row">
+        <div class="property-columns" id="latest-properties">
+            <div class="col-md-12">
+                <div class="block-heading">
+                    <h4><span class="heading-icon"><i class="fa fa-leaf"></i></span>املاک جدید</h4>
+                    <a href="~/Home/MelkAllShowList" class="btn btn-primary btn-sm pull-right">مشاهده ملک های بیشتر <i class="fa fa-long-arrow-left"></i></a>
+                </div>
+            </div>
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li class="col-md-4 col-sm-6 type-rent">
+                        <div class="property-block">
+                            <a href="/Home/Melk/@item.Id" class="property-featured-image">
+                                @if (item.ImgL != null)
+                                {
+                                    <img id="zoom_01" src="~/Content/images/Melks/@item.ImgL" style="height:218.66px;width:328px" alt="">
+                                }
+                                else if (item.ImgS != null)
+                                {
+                                    <img id="zoom_01" src="~/Content/images/Melks/@item.ImgS" style="height:218.66px;width:328px" alt="">
+                                }
+                                else if (item.ImgB != null)
+                                {
+                                    <img id="zoom_01" src="~/Content/images/Melks/@item.ImgB" style="height:218.66px;width:328px" alt="">
+                                }
+                                else
+                                {
+                                    <img id="zoom_01" src="~/Content/images/property1-map.jpg" style="height:218.66px;width:328px" alt="">
+                                }
+
+
+                                @*<span class="~/Content/images-count"><i class="fa fa-picture-o"></i> 2</span>*@
+                                <span class="badges">@db.TypeMelkRepository.GetAll(x => x.Id == item.typeMelkId).FirstOrDefault().typemelkname</span>
+                            </a>
+                            <div class="property-info">
+                                <h4><a href="/Home/Melk/@item.Id">@item.Title</a></h4>
+                                <span class="location">@db.CityRepository.GetAll(x => x.Id == item.cityId).FirstOrDefault().cityname  _  @db.TypeMahdodeRepository.GetAll(x => x.Id == item.typeMahdodeId).FirstOrDefault().typemahdodename</span>
+                                <div class="price">@item.PriceAll.ToString("#,0 تومان")</div>
+                            </div>
+                            <div class="property-amenities clearfix">
+                                <span class="area"><strong>@item.Meter</strong>متر مربع</span>
+                                <span class="baths"><strong>@item.Wc</strong>سرویس</span>
+                                <span class="beds"><strong>@item.Rooms</strong>اتاق</span>
+                                @*<span class="parking"><strong>1</strong>پارکینگ</span>*@
+                            </div>
+                        </div>
+                    </li>
+                }
+
+
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <style>
+            .pagep1 {
+                display: inline-block;
+                margin-top: 1px;
+                margin-right: 0;
+                margin-bottom:30px;
+            }
+
+                .pagep1 a {
+                    /*color: black;*/
+                    float: left;
+                    padding: 10px 10px;
+                    text-decoration: none;
+                    transition: background-color .3s;
+                    border: 1px solid #dee2e6;
+                    box-shadow: 0 0 2rem 0 #f55a4eb5 inset;
+                }
+
+                    .pagep1 a.active {
+                        background-color: darkgray;
+                        color: blue;
+                        border: 1px solid #4CAF50;
+                    }
+
+                    .pagep1 a:hover:not(.active) {
+                        background-color: darkslategrey;
+                    }
+        </style>
+        <div class="pagedList pagep1 container " id="contentPager">
+            @Html.PagedListPager(Model, page => Url.Action("LastMelkShow", "Home", new { page }),
+                                    /*     PagedListRenderOptions.PageNumbersOnly*/
+                                    //PagedListRenderOptions.Classic
+                                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                                    {
+                                        LinkToFirstPageFormat = "اولین",
+                                        LinkToPreviousPageFormat = "قبلی",
+                                        LinkToNextPageFormat = "بعدی",
+                                        LinkToLastPageFormat = "آخرین",
+                                        //DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                        //DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        //DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                        //DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                        MaximumPageNumbersToDisplay = 7,
+                                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                    }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "some_grid_container" }))
+
+
+
+            @*<div class="pagedList">
+                 @Html.PagedListPager(Model, page => Url.Action("PagingSortingAndSearching", new
+            {
+                page,
+                sortOn = ViewBag.SortOn,
+                orderBy = ViewBag.OrderBy,
+                pSortOn =
+                 ViewBag.SortOn,
+                keyword = ViewBag.Keyword
+            }),
+             PagedListRenderOptions.ClassicPlusFirstAndLast)
+             </div>*@
+            @*@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("PagedListPager_Index", new { page, accountmenu = ViewBag.AccountMenu, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+            {
+                LinkToFirstPageFormat = "<<",
+                LinkToPreviousPageFormat = "<",
+                LinkToNextPageFormat = ">",
+                LinkToLastPageFormat = ">>",
+                //DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                //DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                //DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                //DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                MaximumPageNumbersToDisplay = 0,
+                DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+            }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "some_grid_container" }))*@
+
+        </div>
+    </div>
+
+</div>

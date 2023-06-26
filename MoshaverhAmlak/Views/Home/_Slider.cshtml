@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MoshaverDataLayer.Model.Slider>
+@using MoshaverDataLayer.Context;
+@{
+    UnitOfWork db = new UnitOfWork();
+    
+}
+
+<div class="site-showcase">
+    <div class="slider-mask overlay-transparent"></div>
+    <!-- Start Hero Slider -->
+    <div class="hero-slider flexslider clearfix" data-autoplay="yes" data-pagination="no" data-arrows="yes" data-style="fade" data-pause="yes">
+        <ul class="slides">
+           
+            @foreach (var item in Model)
+            {
+                var melk = db.MelkRepository.GetById(item.MelkId);
+                <li class="parallax" style="background-image:url(/Content/images/Little/@item.SliderIMG)">
+                    <div class="flex-caption">
+                        <strong class="title">@melk.Title <em>@db.CityRepository.GetAll(x=>x.Id==melk.cityId).FirstOrDefault().cityname <br /> @db.TypeMahdodeRepository.GetAll(x => x.Id == melk.typeMahdodeId).FirstOrDefault().typemahdodename</em></strong>
+                        <div class="price">@melk.PriceAll.ToString("#,0تومان")</div>
+                        <a href="/Home/MelkAllShowList/@melk.Id" class="btn btn-primary btn-block">جزئیات</a>
+                        
+                    </div>
+                </li>
+            }
+            
+       
+        </ul>
+    </div>
+    <!-- End Hero Slider -->
+ @Html.Action("SearchSlider", "Home")
+</div>

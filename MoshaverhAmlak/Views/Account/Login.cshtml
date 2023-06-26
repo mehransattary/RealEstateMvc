@@ -1,0 +1,125 @@
+﻿@using MoshaverhAmlak.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+
+}
+
+<div class="site-showcase">
+    <!-- Start Page Header -->
+    <div class="parallax page-header" style="background-image:url(/Content/images/page-header1.jpg)">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>ورود / ثبت نام</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+</div>
+
+<div class="main" role="main">
+    <div id="content" class="content full">
+        <div class="container">
+            <div class="page">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="alert alert-default fade in no-close"style="opacity:0">
+                     
+                        </div>
+                    </div>
+               @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+               {   
+                   @Html.AntiForgeryToken()
+                   @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-xs-12 col-md-4 col-sm-8 login-form " style="color: black; BORDER-RADIUS: 5PX;  padding: 15px 16px; border: 1px solid; box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .8); position: relative; background: inherit;overflow: hidden;">
+                    <h3>ورود</h3>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-user"></i></span>
+
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "نام کاربری" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-lock"></i></span>
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "رمز عبور" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="checkbox">
+
+                        @Html.CheckBoxFor(m => m.RememberMe, new { placeholder = "به خاطر سپاری" })
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">ورود</button>
+
+                    <br><br>
+                    @Html.ActionLink("ثبت نام", "Register")
+                    <br><br>
+                    @Html.ActionLink("فراموشی رمزعبور", "ForgotPassword")
+                </div>
+
+               }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Use a local account to log in.</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Register as a new user", "Register")
+                </p>
+              
+            }
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>*@
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

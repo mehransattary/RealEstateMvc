@@ -1,0 +1,95 @@
+﻿@model  IEnumerable<MoshaverDataLayer.Model.Melk>
+@using MoshaverDataLayer.Context;
+
+@{
+    ViewBag.Title = "MelkAllShowToury";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+    UnitOfWork db = new UnitOfWork();
+}
+<div class="site-showcase">
+    <!-- Start Page Header -->
+    <div class="parallax page-header" style="background-image:url(/Content/images/page-header1.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>لیست املاک ساده</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+</div>
+<div class="main" role="main">
+    <div id="content" class="content full">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block-heading">
+                        <h4><span class="heading-icon"><i class="fa fa-caret-left icon-design"></i><i class="fa fa-th-large"></i></span>نمایش توری</h4>
+                        <div class="toggle-view pull-right">
+                            @if (Session["typemelkid"] != null)
+                            {
+                                int id = Convert.ToInt32(Session["typemelkid"]);
+
+                                <a data-toggle="tooltip" title="نمایش توری" data-placement="bottom" href="/Home/MelkAllShowToury/@id" class="active"><i class="fa fa-th-list"></i></a>
+                                <a data-toggle="tooltip" title="نمایش لیستی" data-placement="bottom" href="/Home/MelkAllShowList/@id" class="active"><i class="fa fa-th-large"></i></a>
+                            }
+                            else
+                            {
+                                <a data-toggle="tooltip" title="نمایش توری" data-placement="bottom" href="/Home/MelkAllShowToury/" class="active"><i class="fa fa-th-list"></i></a>
+                                <a data-toggle="tooltip" title="نمایش لیستی" data-placement="bottom" href="/Home/MelkAllShowList/" class="active"><i class="fa fa-th-large"></i></a>
+                            }
+                        </div>
+                    </div>
+                    <div class="property-grid">
+                        <ul class="grid-holder col-3" style="position: relative; height: 860.876px;">
+                            @foreach (var item in Model)
+                            {
+                                <li class="grid-item type-rent" style="position: absolute; right: 0px; top: 0px;">
+                                    <div class="property-block">
+                                        <a href="/Home/Melk/@item.Id" class="property-featured-image"><div class="overlay" style="line-height:216px"><i class="fa fa-search"></i></div> 
+                                            @if (item.ImgL != null)
+                                            {
+                                                <img src="~/Content/images/Melks/@item.ImgL" style="height:218.66px;width:328px" alt="">
+                                            }
+                                            else if (item.ImgS != null)
+                                            {
+                                                <img src="~/Content/images/Melks/@item.ImgS" style="height:218.66px;width:328px" alt="">
+                                            }
+                                            else if (item.ImgB != null)
+                                            {
+                                                <img src="~/Content/images/Melks/@item.ImgB" style="height:218.66px;width:328px" alt="">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/property1-map.jpg" style="height:218.66px;width:328px" alt="">
+                                            }
+                                        <span class="badges">@db.TypeMelkRepository.GetAll(x => x.Id == item.typeMelkId).FirstOrDefault().typemelkname</span> </a>
+                                        <div class="property-info">
+                                            <h4><a href="#">@item.Title</a></h4>
+                                            <span class="location"><i class="fa fa-map-marker"></i> @db.CityRepository.GetAll(x => x.Id == item.cityId).FirstOrDefault().cityname  _  @db.TypeMahdodeRepository.GetAll(x => x.Id == item.typeMahdodeId).FirstOrDefault().typemahdodename</span>
+                                            <div class="price">@item.PriceAll.ToString("#,0 تومان")</div>
+                                        </div>
+                                        <div class="property-amenities clearfix"> <span class="area"><strong>@item.Meter</strong>متر مربع</span> <span class="baths"><strong>@item.Wc</strong>سرویس</span> <span class="beds"><strong>@item.Rooms</strong>اتاق</span>  </div>
+                                    </div>
+                                </li>
+                            }
+                     
+                         
+                        </ul>
+                    </div>
+                    <ul class="pagination">
+                        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

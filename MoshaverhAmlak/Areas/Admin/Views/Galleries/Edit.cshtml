@@ -1,0 +1,74 @@
+﻿@model MoshaverDataLayer.Model.Gallery
+
+@{
+    ViewBag.Title = "Edit";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<link href="~/Areas/Admin/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" />
+@using (Html.BeginForm("Edit", "Galleries", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+   
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(x=>x.ImgGalleryB)
+        @Html.HiddenFor(x => x.ImgGalleryL)
+        @Html.HiddenFor(x => x.ImgGalleryS)
+        <div class="form-group">
+
+            <div class="col-md-12">
+                @Html.DropDownList("MelkId", null, htmlAttributes: new { @class = "form-control", @required = "required", title = "لطفانام شهررا وارد کنید." })
+                @Html.ValidationMessageFor(model => model.MelkId, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <img src="~/Content/images/gallery/Little/@Model.ImgGalleryL" alt=" " width="200" height="200" class="img-responsive" />
+            </div>
+          
+            <div class="card-box col-md-6">
+       
+
+                <div class="dropify-loader" style="display: none;"></div>
+                <div class="dropify-errors-container"><ul></ul></div>
+                <input type="file" name="file" class="dropify" data-max-file-size="1M">
+                <div class="dropify-preview" style="display: none;"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner">soroush-logo.png</span></p><p class="dropify-infos-message">برای جایگزینی فایل را به اینجا بکشید یا کلیک کنید</p></div></div></div>
+
+            </div>
+        </div>
+
+ 
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="ذخیره" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+
+    <script src="~/Areas/Admin/assets/plugins/fileuploads/js/dropify.min.js"></script>
+    <script type="text/javascript">
+    $('.dropify').dropify({
+        messages: {
+            'default': 'فایل را به اینجا بکشید یا کلیک کنید',
+            'replace': 'برای جایگزینی فایل را به اینجا بکشید یا کلیک کنید',
+            'remove': 'پاک کردن',
+            'error': 'با پوزش فراوان، خطایی رخ داده'
+        },
+        error: {
+            'fileSize': 'حجم فایل بیشتر از حد مجاز است (1M).'
+        }
+    });
+    </script>
+
+
+}

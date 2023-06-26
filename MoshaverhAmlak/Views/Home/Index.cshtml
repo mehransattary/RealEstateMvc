@@ -1,0 +1,38 @@
+﻿
+@using MoshaverDataLayer.Context;
+
+@{ UnitOfWork db = new UnitOfWork();
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+@if(db.SliderRepository.GetAll().Count()!=0)
+{
+@Html.Action("Slider", "Home")
+}
+
+
+<!-- Start Content -->
+<div class="main" role="main">
+    <div id="content" class="content full">
+@if (db.AdvertiseRepository.GetAll().Count() != 0)
+{
+        @Html.Action("AdvertiseShow", "Home")
+}
+        <div class="spacer-40"></div>
+@if (db.MelkRepository.GetAll().Count() != 0)
+{
+        @Html.Action("LastMelkShow", "Home")
+}
+        <div style="margin-bottom:30px;">
+@if (db.MelkRepository.GetAll().Count() != 0)
+{
+            @Html.Action("SpacialAmlak", "Home")
+}
+        </div>
+   @if (db.BrandRepository.GetAll().Count() != 0)
+   {
+
+        @Html.Action("BrandShow", "Home")
+   }
+    </div>
+</div>

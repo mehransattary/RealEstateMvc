@@ -1,0 +1,256 @@
+﻿@model MoshaverDataLayer.Model.Melk
+@using MoshaverDataLayer.Context;
+@{
+    UnitOfWork db = new UnitOfWork();
+    ViewBag.Title = "Melk";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+
+}
+
+<div class="main" role="main">
+    <div id="content" class="content full">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="single-property">
+                        <h2 class="page-title">@Model.Title <span class="location"> @db.CityRepository.GetById(Model.cityId).cityname</span></h2>
+                        <div class="price">@Model.PriceAll.ToString("#,0 تومان")</div>
+                        <div class="property-amenities clearfix">
+                            <span class="area"><strong>برای</strong><br class="visible-xs">@db.TypeMelkRepository.GetAll(x => x.Id == Model.typeMelkId).FirstOrDefault().typemelkname</span>
+                            <span class="area"><strong>@Model.Meter</strong><br class="visible-xs">متر مربع</span>
+                            <span class="baths"><strong>@Model.Wc</strong><br class="visible-xs">سرویس</span>
+                            <span class="beds"><strong>@Model.Rooms</strong><br class="visible-xs">اتاق</span>
+
+                        </div>
+                        <div class="property-slider">
+                            <div id="property-images" class="flexslider">
+
+                                <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                    <ul class="slides" style="width: 800%; transition-duration: 0s; transform: translate3d(-2340px, 0px, 0px);">
+                                        @foreach (var item in db.GalleryRepository.GetAll(x => x.MelkId == Model.Id))
+                                        {
+                                        <li class="item" style="width: 780px; margin-right: 0px; float: left; display: block;  height:500px "> <img src="~/Content/images/gallery/Standard/@item.ImgGalleryS" alt="" draggable="false"style="height:500px "> </li>
+                                        } 
+                                        <li class="item flex-active-slide" style="width: 780px; margin-right: 0px; float: left; display: block;height:500px  "> <img src="~/Content/images/Melks/@Model.ImgL" alt="" draggable="false"style="height:500px "> </li>
+                                     
+                                    </ul>
+                                </div><ul class="flex-direction-nav"><li class="flex-nav-prev"><a class="flex-prev" href="#"></a></li><li class="flex-nav-next"><a class="flex-next flex-disabled" href="#" tabindex="-1"></a></li></ul>
+
+                            </div>
+                            <div id="property-thumbs" class="flexslider">
+
+                                <div class="flex-viewport" style="overflow: hidden; position: relative;">
+                                    <ul class="slides" style="width: 800%; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+                                        @foreach (var item in db.GalleryRepository.GetAll(x => x.MelkId == Model.Id))
+                                        {
+                                            <li class="item" style="width: 175px; margin-right: 16px; float: left; display: block; height:115px"> <img src="~/Content/images/gallery/Standard/@item.ImgGalleryS" alt="" draggable="false"style=""> </li>
+
+                                        }
+
+                                        <li class="item flex-active-slide" style="width: 175px; margin-right: 16px; float: left; display: block;height:115px"> <img src="~/Content/images/Melks/@Model.ImgL"alt="" draggable="false"style=""> </li>
+                                      
+                                    </ul>
+                                </div><ul class="flex-direction-nav"><li class="flex-nav-prev"><a class="flex-prev flex-disabled" href="#" tabindex="-1"></a></li><li class="flex-nav-next"><a class="flex-next flex-disabled" href="#" tabindex="-1"></a></li></ul>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><i class="fa fa-caret-down"></i>  <a data-toggle="tab" href="#description"> توضیحات </a> </li>
+                                <li><i class="fa fa-caret-down"></i>  <a data-toggle="tab" href="#amenities"> امکانات </a> </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div id="description" class="tab-pane active">
+                                    <p>آدرس : @Model.addressId</p>
+                                    <p>@Model.typeEmkanatId</p>
+                                </div>
+                                <div id="amenities" class="tab-pane">
+                                    <div class="additional-amenities">
+                                        <span class="available"><i class="fa fa-check-square"></i> @db.TypeGardadRepository.GetById(Model.typeGardadId).typegardadname</span>
+                                        <span class="available"><i class="fa fa-check-square"></i> @db.TypeSanadRepository.GetById(Model.typeSanadId).typesanadname</span>
+                                        <span class="navailable"><i class="fa fa-check-square"></i> @db.TypeCustumerRepository.GetById(Model.typecustumerId).Custumer</span>
+                                        <span class="available"><i class="fa fa-check-square"></i> @db.CityRepository.GetById(Model.cityId).cityname</span>
+                                        <span class="navailable"><i class="fa fa-check-square"></i> @db.TypeMahdodeRepository.GetById(Model.typeMahdodeId).typemahdodename</span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="sidebar right-sidebar col-md-3">
+                    <div class="widget sidebar-widget">
+                        <h3 class="widgettitle">جستجوی ملک</h3>
+                        <div class="full-search-form">
+                       
+
+                            @Html.Action("SearchSliderMelk","Home")
+
+
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="widget sidebar-widget featured-properties-widget">
+                            <h3 class="widgettitle">املاک ویژه</h3>
+                            <ul class="owl-carousel owl-alt-controls1 single-carousel" data-items-desktop="1" data-autoplay="no" data-pagination="no" data-arrows="yes">
+                                @foreach (var item in db.MelkRepository.GetAll(x => x.SpecialAmlak == true))
+                                {
+
+                                    <li class="item property-block" style="width:322px;">
+                                        <a href="#" class="property-featured-image"> <img src="~/Content/images/Melks/@item.ImgL" alt="" style="height:250px; "> <span class="badges">@db.TypeMelkRepository.GetById(item.typeMelkId).typemelkname)</span> </a>
+                                        <div class="property-info">
+                                            <h4><a href="#">@item.Title</a></h4>
+                                            <span class="location">تبریز</span>
+                                            <div class="price">@item.PriceAll.ToString("#,0 تومان")</div>
+                                        </div>
+                                    </li>
+                                }
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-bottom:8px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="block-heading">
+                <h4><span class="heading-icon"><i class="fa fa-caret-left icon-design"></i><i class="fa fa-star"></i></span>املاک مرتبط</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="owl-carousel owl-alt-controls" data-autoplay="no" data-pagination="no" data-arrows="yes">
+
+                @foreach (var item in db.MelkRepository.GetAll(x => x.typeMelkId == Model.typeMelkId))
+            {
+                    <li class="item property-block">
+                        <a href="property-detail.html" class="property-featured-image">
+                            @if (item.ImgL != null)
+                            {
+                                <img src="/Content/images/Melks/@item.ImgL" style="height:218.66px;width:328px" alt="">
+                            }
+                            else
+                            {
+                                <img src="/Content/images/Melks/@item.ImgS" style="height:218.66px;width:328px" alt="">
+                            }
+
+
+                            <span class="badges">@db.TypeMelkRepository.GetAll(x => x.Id == item.typeMelkId).FirstOrDefault().typemelkname</span>
+                        </a>
+                        <div class="property-info">
+                            <h4><a href="property-detail.html">@item.Title</a></h4>
+                            <span class="location">@db.CityRepository.GetAll(x => x.Id == item.cityId).FirstOrDefault().cityname  _  @db.TypeMahdodeRepository.GetAll(x => x.Id == item.typeMahdodeId).FirstOrDefault().typemahdodename</span>
+                            <div class="price">@item.PriceAll.ToString("#,0 تومان")</div>
+                        </div>
+                    </li>
+                }
+
+
+
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+      
+       
+            @*<section class="post-comments" id="comments">
+                <h3><i class="fa fa-comment"></i> دیدگاه ها (4)</h3>
+                <ol class="comments">
+                    <li>
+                        <div class="post-comment-block">
+                            <div class="img-thumbnail"> <img src="images/img_avatar.png" alt="avatar"> </div>
+                            <a href="#" class="btn btn-primary btn-xs pull-right">پاسخ</a>
+                            <h5>جان اسنو می گوید</h5>
+                            <span class="meta-data">23 آذر 1396 ساعت 13:58</span>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="post-comment-block">
+                            <div class="img-thumbnail"> <img src="images/img_avatar.png" alt="avatar"> </div>
+                            <a href="#" class="btn btn-primary btn-xs pull-right">پاسخ</a>
+                            <h5>جان اسنو می گوید</h5>
+                            <span class="meta-data">23 آذر 1396 ساعت 13:58</span>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="post-comment-block">
+                                    <div class="img-thumbnail"> <img src="images/img_avatar.png" alt="avatar"> </div>
+                                    <a href="#" class="btn btn-primary btn-xs pull-right">پاسخ</a>
+                                    <h5>جان اسنو می گوید</h5>
+                                    <span class="meta-data">23 آذر 1396 ساعت 13:58</span>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="post-comment-block">
+                                    <div class="img-thumbnail"> <img src="images/img_avatar.png" alt="avatar"> </div>
+                                    <a href="#" class="btn btn-primary btn-xs pull-right">پاسخ</a>
+                                    <h5>جان اسنو می گوید</h5>
+                                    <span class="meta-data">23 آذر 1396 ساعت 13:58</span>
+                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="post-comment-block">
+                            <div class="img-thumbnail"> <img src="images/img_avatar.png" alt="avatar"> </div>
+                            <a href="#" class="btn btn-primary btn-xs pull-right">پاسخ</a>
+                            <h5>جان اسنو می گوید</h5>
+                            <span class="meta-data">23 آذر 1396 ساعت 13:58</span>
+                            <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+            <section class="post-comment-form">
+                <h3><i class="fa fa-share"></i> دیدگاه خود را بیان کنید</h3>
+                <form>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="text" class="form-control input-lg" placeholder="نام شما">
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="email" class="form-control input-lg" placeholder="ایمیل شما">
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <input type="url" class="form-control input-lg" placeholder="وبسایت (اختیاری)">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <textarea cols="8" rows="4" class="form-control input-lg" placeholder="دیدگاه شما"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary btn-lg">ثبت دیدگاه</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>*@
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,44 @@
+﻿@model IEnumerable< MoshaverDataLayer.Model.Setting>
+  
+@{
+  ViewBag.Title = "تماس باما";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+<div class="parallax page-header" style="background-image:url(/Content/images/page-header1.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>تماس باما</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main" role="main">
+    <div id="content" class="content full">
+        <div class="container">
+            <div class="page">
+                <div class="row">
+          @foreach (var item in Model)
+          {
+            <div class="col-md-12 col-sm-12">
+                <h3>محل ما</h3>
+                <div class="padding-as25 lgray-bg">
+                    <p class="big">
+                        @item.AddressStore1
+                        <br />
+                        @item.AddressStore2
+                    </p>
+
+                    <p>جهت ارتباط با ما با ایمیل 
+                    <a href="#">  <strong>@item.EmailStore1 _ @item.EmailStore2</strong></a> 
+                    <br />
+                    و یا شماره تلفن <strong class="ltr_text">@item.TellPhone1 _ @item.TellPhone2</strong> تماس حاصل نمایید.</p>
+                </div>
+            </div>
+          }
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

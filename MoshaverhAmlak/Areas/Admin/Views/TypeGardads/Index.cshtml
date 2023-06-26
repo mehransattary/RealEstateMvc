@@ -1,0 +1,149 @@
+﻿@model IEnumerable<MoshaverDataLayer.Model.TypeGardad>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    int counter = 0;
+}
+
+
+<div class="col-sm-12">
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="m-b-30">
+                        <h2 class="pull-right">نوع قرارداد</h2>
+                        <button id="btnNewTypeGardads" class="btn btn-primary waves-effect waves-light">افزودن <i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editable-responsive">
+                <div id="datatable-editable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                    <div class="col-sm-6">
+                        </div>
+                    </div>
+   
+                </div><div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped dataTable no-footer" id="datatable-editable" role="grid" aria-describedby="datatable-editable_info">
+                                <thead>
+
+
+
+                                    <tr role="row">
+                                        <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="فعالیت" style="width:20px;">شماره</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="datatable-editable" rowspan="1" colspan="1" aria-sort="ascending" aria-label=: activate to sort column descending" style="width: 238px;">@Html.DisplayNameFor(model => model.typegardadname)</th>
+
+                                        <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="فعالیت" style="width: 156px;">فعالیت</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+
+
+                                    @foreach (var item in Model)
+                                    {
+                                        counter += 1;
+
+                                        <tr class="gradeX odd" role="row">
+
+                                            <td class="sorting_1">@counter</td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.typegardadname)
+                                            </td>
+
+                                            <td class="actions">
+                                                <a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a>
+                                                <a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
+                                                <a class="on-default edit-row" onclick="editGroup(@item.Id)"><i class="fa fa-pencil"></i></a>
+                                                <a class="on-default remove-row" href="/Admin/TypeGardads/Delete/@item.Id"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end: panel body -->
+
+    </div> <!-- end panel -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document" style="margin-top: 200px;">
+        <div class="modal-content" style="color: black;
+    BORDER-RADIUS: 10PX;
+    padding: 15px 16px;
+    /* font-size: -webkit-xxx-large; */
+    border: 1px solid;
+    box-shadow: 0 30rem 0 #71b6f9 inset;
+    position: relative;
+    background: inherit;
+    overflow: hidden;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body" id="myModalBody">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Modal -->
+<script src="~/Areas/Admin/assets/js/jquery.min.js"></script>
+@section scripts
+{
+
+    <script src="~/Scripts/modal.js"></script>
+    <script>
+        $("#btnNewTypeGardads").click(function () {
+
+            $.get("/Admin/TypeGardads/Create", function (result) {
+
+                $("#myModal").modal();
+                $("#myModalLabel").html("افزودن  نوع قرارداد جدید");
+                $("#myModalBody").html(result);
+            });
+
+        });
+
+        function editGroup(id) {
+            $.get("/Admin/TypeGardads/Edit/" + id, function (result) {
+                $("#myModal").modal();
+                $("#myModalLabel").html("ویرایش نوع  قرارداد");
+                $("#myModalBody").html(result);
+            });
+        }
+
+
+        //function deleteGroup(id) {
+        //    $.get("/Admin/Cities/Delete/" + id, function (result) {
+        //        $("#myModal").modal();
+        //        $("#myModalLabel").html("حذف ش");
+        //        $("#myModalBody").html(result);
+        //    });
+        //}
+
+    </script>
+}
+
+
+
+
+
+
+
+

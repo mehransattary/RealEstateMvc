@@ -1,0 +1,107 @@
+﻿@model MoshaverDataLayer.Model.Setting
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Setting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NameStore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NameStore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressStore1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressStore1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AddressStore2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressStore2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailStore1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailStore1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailStore2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailStore2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TellPhone1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TellPhone1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TellPhone2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TellPhone2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.addressPosti)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.addressPosti)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AboutMe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AboutMe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.imageSrc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.imageSrc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

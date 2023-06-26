@@ -1,0 +1,44 @@
+﻿@model  IEnumerable< MoshaverDataLayer.Model.UsualQuestion>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="block-heading">
+            <h4><span class="heading-icon"><i class="fa fa-caret-left icon-design"></i><i class="fa fa-question"></i></span>سوالات متداول</h4>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="accordion" id="toggleArea">
+                <div class="accordion" id="toggleArea">
+                    <div class="accordion-group panel">
+                        <div class="accordion-heading togglize"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseOne"> @item.Title<i class="fa fa-plus-circle"></i> <i class="fa fa-minus-circle"></i> </a> </div>
+                        <div id="collapseOne" class="accordion-body collapse">
+                            <div class="accordion-inner"> @item.Text  </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group panel">
+                        <div class="accordion-heading togglize"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseTwo"> @item.Title2<i class="fa fa-plus-circle"></i> <i class="fa fa-minus-circle"></i> </a> </div>
+                        <div id="collapseTwo" class="accordion-body collapse">
+                            <div class="accordion-inner"> @item.Text2  </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading togglize"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#" href="#collapseThird"> @item.Title3<i class="fa fa-plus-circle"></i> <i class="fa fa-minus-circle"></i> </a> </div>
+                        <div id="collapseThird" class="accordion-body collapse">
+                            <div class="accordion-inner"> @item.Text3  </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        }
+    
+        <!-- End Toggle -->
+    </div>
+</div>
+
+
+
+
+
+

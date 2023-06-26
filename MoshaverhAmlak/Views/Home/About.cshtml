@@ -1,0 +1,35 @@
+﻿@model IEnumerable< MoshaverDataLayer.Model.Setting>
+@{
+    ViewBag.Title = "About";
+  Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<div class="parallax page-header" style="background-image:url(/Content/images/page-header1.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>درباره ما</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main" role="main">
+    <div id="content" class="content full">
+        <div class="container">
+            <div class="page">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        @foreach (var item in Model)
+                        {
+                            <p>@Html.Raw(item.AboutMe)</p>
+                        }
+                   
+                   
+                    </div>
+         
+                </div>
+        @Html.Action("UsualQuestions", "Home")
+            </div>
+        </div>
+    </div>
+</div>

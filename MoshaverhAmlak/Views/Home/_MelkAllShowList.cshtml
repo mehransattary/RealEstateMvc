@@ -1,0 +1,189 @@
+﻿
+@model PagedList.IPagedList<MoshaverDataLayer.Model.Melk>
+@using PagedList.Mvc
+@using MoshaverDataLayer.Context;
+@{
+    UnitOfWork db = new UnitOfWork();
+}
+<div class="site-showcase"style="height: 200px;">
+    <!-- Start Page Header -->
+    <div class="parallax page-header" style="background-image:url(/Content/images/page-header1.jpg); height: 200px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h1>لیست املاک ساده</h1>
+         
+                </div>
+                @Html.Action("SearchSlider", "Home")
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+</div>
+
+<div class="main" role="main"id="some_grid_container">
+    <div id="content" class="content full">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block-heading">
+                        <h4><span class="heading-icon"><i class="fa fa-caret-left icon-design"></i><i class="fa fa-th-list"></i></span>لیست املاک</h4>
+                        @*<div class="toggle-view pull-right">
+                            @if (Session["typemelkid"] != null)
+                            {
+                                int id = Convert.ToInt32(Session["typemelkid"]);
+
+                                <a data-toggle="tooltip" title="نمایش توری" data-placement="bottom" href="/Home/MelkAllShowToury/@id" class="active"><i class="fa fa-th-list"></i></a>
+                                <a data-toggle="tooltip" title="نمایش لیستی" data-placement="bottom" href="/Home/MelkAllShowList/@id" class="active"><i class="fa fa-th-large"></i></a>
+                            }
+                            else
+                            {
+                                <a data-toggle="tooltip" title="نمایش توری" data-placement="bottom" href="/Home/MelkAllShowToury/" class="active"><i class="fa fa-th-list"></i></a>
+                                <a data-toggle="tooltip" title="نمایش لیستی" data-placement="bottom" href="/Home/MelkAllShowList/" class="active"><i class="fa fa-th-large"></i></a>
+                            }
+
+
+                        </div>*@
+                    </div>
+                    <div class="property-listing">
+                        <ul>
+                            @foreach (var item in Model)
+                            {
+                                <li class="type-rent col-md-12">
+                                    <div class="col-md-4">
+                                        <a href="/Home/Melk/@item.Id" class="property-featured-image">
+                                            <div class="overlay" style="line-height:211px"><i class="fa fa-search"></i></div>
+                                            @if (item.ImgL != null)
+                                            {
+                                                <img src="~/Content/images/Melks/@item.ImgL" style="height:218.66px;width:328px" alt="">
+                                            }
+                                            else if (item.ImgS != null)
+                                            {
+                                                <img src="~/Content/images/Melks/@item.ImgS" style="height:218.66px;width:328px" alt="">
+                                            }
+                                            else if (item.ImgB != null)
+                                            {
+                                                <img src="~/Content/images/Melks/@item.ImgB" style="height:218.66px;width:328px" alt="">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/property1-map.jpg" style="height:218.66px;width:328px" alt="">
+                                            }
+                                            <span class="badges">@db.TypeMelkRepository.GetAll(x => x.Id == item.typeMelkId).FirstOrDefault().typemelkname</span>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="property-info">
+                                            <div class="price">@item.PriceAll.ToString("#,0تومان")</div>
+                                            <h3><a href="/Home/Melk/@item.Id">@item.Title</a></h3>
+                                            <span class="location"><i class="fa fa-map-marker"></i> @db.CityRepository.GetAll(x => x.Id == item.cityId).FirstOrDefault().cityname</span>
+                                            <p>@item.typeEmkanatId</p>
+                                        </div>
+                                        <div class="property-amenities clearfix">
+                                            <span class="area"><strong>@item.Meter</strong>متر مربع</span>
+                                            <span class="baths"><strong>@item.Wc</strong>سرویس</span>
+                                            <span class="beds"><strong>@item.Rooms</strong>اتاق</span>
+
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+                    @*<ul class="pagination">
+                        <li><a href="#"><i class="fa fa-chevron-right"></i></a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#"><i class="fa fa-chevron-left"></i></a></li>
+                    </ul>*@
+                </div>
+            </div>
+            <div class="row">
+                <style>
+                    .pagep1 {
+                        display: inline-block;
+                        margin-top: 1px;
+                        margin-right: 0;
+                        margin-bottom: 30px;
+                    }
+
+                        .pagep1 a {
+                            /*color: black;*/
+                            float: left;
+                            padding: 10px 10px;
+                            text-decoration: none;
+                            transition: background-color .3s;
+                            border: 1px solid #dee2e6;
+                            box-shadow: 0 0 2rem 0 #f55a4eb5 inset;
+                        }
+
+                            .pagep1 a.active {
+                                background-color: darkgray;
+                                color: blue;
+                                border: 1px solid #4CAF50;
+                            }
+
+                            .pagep1 a:hover:not(.active) {
+                                background-color: darkslategrey;
+                            }
+                </style>
+                <div class="pagedList pagep1 container " id="contentPager">
+                    @Html.PagedListPager(Model, page => Url.Action("MelkAllShowList", "Home", new { page }),
+                                    /*     PagedListRenderOptions.PageNumbersOnly*/
+                                    //PagedListRenderOptions.Classic
+                                    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                                    {
+                                        LinkToFirstPageFormat = "اولین",
+                                        LinkToPreviousPageFormat = "قبلی",
+                                        LinkToNextPageFormat = "بعدی",
+                                        LinkToLastPageFormat = "آخرین",
+                                        //DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                        //DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                        //DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                        //DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                        MaximumPageNumbersToDisplay = 7,
+                                        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+                                    }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "some_grid_container" }))
+
+
+
+                    @*<div class="pagedList">
+                     @Html.PagedListPager(Model, page => Url.Action("PagingSortingAndSearching", new
+                {
+                    page,
+                    sortOn = ViewBag.SortOn,
+                    orderBy = ViewBag.OrderBy,
+                    pSortOn =
+                     ViewBag.SortOn,
+                    keyword = ViewBag.Keyword
+                }),
+                 PagedListRenderOptions.ClassicPlusFirstAndLast)
+                 </div>*@
+                    @*@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("PagedListPager_Index", new { page, accountmenu = ViewBag.AccountMenu, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions
+                {
+                    LinkToFirstPageFormat = "<<",
+                    LinkToPreviousPageFormat = "<",
+                    LinkToNextPageFormat = ">",
+                    LinkToLastPageFormat = ">>",
+                    //DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                    //DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                    //DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                    //DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                    MaximumPageNumbersToDisplay = 0,
+                    DisplayEllipsesWhenNotShowingAllPageNumbers = false,
+                }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "some_grid_container" }))*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

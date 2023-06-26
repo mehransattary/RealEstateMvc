@@ -1,0 +1,22 @@
+﻿@model  IEnumerable< MoshaverDataLayer.Model.Social>
+
+
+<footer class="site-footer-bottom">
+    <div class="container">
+        <div class="row">
+            <div class="copyrights-col-left col-md-6 col-sm-6">
+            <p>مشاوراملاک</p>
+            </div>
+            <div class="copyrights-col-right col-md-6 col-sm-6">
+                <div class="social-icons">
+                  @foreach (var item in Model)
+                  {
+                    <a href=@item.SocialLink target="_blank" style="height:40px;width:40px;"><img src="/Content/images/social/@item.SocialIcon" style="border-radius:50%;height:38px;width:38px;"/></a>
+                  }
+                  
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

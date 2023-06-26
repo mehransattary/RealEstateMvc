@@ -1,0 +1,26 @@
+﻿@model  IEnumerable<MoshaverDataLayer.Model.Brand>
+@{
+    ViewBag.Title = "BrandShow";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <div class="block-heading">
+        <h4><span class="heading-icon"><i class="fa fa-users"></i></span>برندها</h4>
+        
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <ul class="owl-carousel" id="clients-slider" data-autoplay="yes" data-pagination="no" data-arrows="no" data-items-desktop="6" data-items-desktop-small="4" data-items-mobile="2" data-items-tablet="4">
+               @foreach (var item in Model)
+               {
+
+                <li class="item"> <a href="/" ><img src="~/Content/images/Brand/@item.ImgPath" alt=""style="height:50px;width:150px;"></a> </li>
+               }
+           
+              
+            </ul>
+        </div>
+    </div>
+</div>
+

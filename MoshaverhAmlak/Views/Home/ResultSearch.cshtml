@@ -1,0 +1,38 @@
+﻿@model  IEnumerable< MoshaverDataLayer.ViewModel.SearchCartViewModel>
+@using MoshaverDataLayer.Model;
+@using MoshaverDataLayer.Context;
+@{
+    ViewBag.Title = " نتیجه جستجو";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+    UnitOfWork db = new UnitOfWork();
+}
+
+
+<div id="SearchCartViewModel">
+    @Html.Partial("_ResultSearch", Model)
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("click", "#contentPager a[href]", function () {
+                $.ajax({
+                    url: $(this).attr("href"),
+                    type: 'Post',
+                    cache: false,
+                    success: function (result) {
+                        $('#SearchCartViewModel').html(result);
+                    }
+                });
+                return false;
+            });
+
+
+
+        });
+</script>
+
+
+
+

@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MoshaverDataLayer.Model
+{
+    public  class Social
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        //________________________________________________________________________
+        [Display(Name = "نام شبکه")]
+        [Required(ErrorMessage = "لطفا{0}راواردکنید")]
+        [MaxLength(100, ErrorMessage = "نباید بیشتر از{1}کاراکتر وارد شه")]
+        public string SocialName { get; set; }
+        //________________________________________________________________________
+        [Display(Name = "آیکون")]
+
+        public string SocialIcon { get; set; }
+        //________________________________________________________________________
+        [Display(Name = "لینک شبکه")]
+        [MaxLength(200, ErrorMessage = "نباید بیشتر از{1}کاراکتر وارد شه")]
+        public string SocialLink { get; set; }
+        //________________________________________________________________________
+        [Display(Name = "عدم نمایش")]
+        public bool NotShow { get; set; }
+        //________________________________________________________________________
+        [Display(Name = "ترتیب نمایش")]
+        public int SocialOrder { get; set; }
+    }
+}

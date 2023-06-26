@@ -1,0 +1,226 @@
+﻿@model MoshaverDataLayer.Model.Melk
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutSite.cshtml";
+}
+
+<div class="site-showcase">
+    <!-- Start Page Header -->
+    <div class="parallax page-header" style="background-image:url(/Content/images/page-header1.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>جزئیات ملک</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+</div>
+<div class="container" style="box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .8);padding: 20px 20px; margin-bottom: 20px; margin-top: 20px;">
+    <a href="/Profile/ShowMelk" class="btn btn-danger btn-rounded w-md waves-effect waves-light m-b-5" style="margin-bottom:5px;">بازگشت <i class="fa fa-backward"></i></a>
+    <div class="row ">
+        <div class="col-sm-12">
+            <div class="card-box" style="margin-top :50px;">
+                <div>
+
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Title)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.cityId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.cityId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ImgL)
+                        </dt>
+
+                        <dd>
+                          
+                            @if (Model.ImgL != null)
+                            {
+                                <img src="~/Content/images/Melks/@Model.ImgL" style="height:70px;width:120px" alt="">
+                            }
+                            else
+                            {
+                                <img src="~/Content/images/Melks/@Model.ImgS" style="height:70px;width:120px" alt="">
+                            }
+
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.addressId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.addressId)
+                        </dd>
+
+                     
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.typeEmkanatId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.typeEmkanatId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.typeGardadId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.typeGardadId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.typeMahdodeId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.typeMahdodeId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.typeMelkId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.typeMelkId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.typeSanadId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.typeSanadId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Meter)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Meter)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PriceMeter)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PriceMeter)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.locationSN)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.locationSN)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TypeEskelet)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TypeEskelet)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.GedmatSakht)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.GedmatSakht)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Zirbana)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Zirbana)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CountTabagat)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CountTabagat)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NumberTabage)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NumberTabage)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NumberVahed)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.NumberVahed)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PriceAll)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.PriceAll)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DateCreate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DateCreate)
+                        </dd>
+
+                     
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Rooms)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Rooms)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Wc)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Wc)
+                        </dd>
+
+                    
+
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+              

@@ -1,0 +1,85 @@
+﻿@model MoshaverDataLayer.Model.Social
+
+@{
+    ViewBag.Title = "Edit";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<link href="~/Areas/Admin/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" />
+@using (Html.BeginForm("Edit", "Socials", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+ 
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SocialName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SocialName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SocialName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("تصویر", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="card-box">
+                    @Html.HiddenFor(x=>x.SocialIcon)
+                    <img src="~/Content/images/social/@Model.SocialIcon" alt=" " width="150" height="40" class="img-responsive" />
+                    <div class="dropify-loader" style="display: none;"></div>
+                    <div class="dropify-errors-container"><ul></ul></div>
+                    <input type="file" name="file" class="dropify" data-max-file-size="1M">
+                    <div class="dropify-preview" style="display: none;"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner">soroush-logo.png</span></p><p class="dropify-infos-message">برای جایگزینی فایل را به اینجا بکشید یا کلیک کنید</p></div></div></div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SocialLink, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SocialLink, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SocialLink, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.NotShow, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(x => x.NotShow)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SocialOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SocialOrder, new { htmlAttributes = new { @class = "form-control" ,min=1} })
+                @Html.ValidationMessageFor(model => model.SocialOrder, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="ذخیره" class="btn btn-success btn-block" />
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Areas/Admin/assets/plugins/fileuploads/js/dropify.min.js"></script>
+<script type="text/javascript">
+    $('.dropify').dropify({
+        messages: {
+            'default': 'فایل را به اینجا بکشید یا کلیک کنید',
+            'replace': 'برای جایگزینی فایل را به اینجا بکشید یا کلیک کنید',
+            'remove': 'پاک کردن',
+            'error': 'با پوزش فراوان، خطایی رخ داده'
+        },
+        error: {
+            'fileSize': 'حجم فایل بیشتر از حد مجاز است (1M).'
+        }
+    });
+</script>

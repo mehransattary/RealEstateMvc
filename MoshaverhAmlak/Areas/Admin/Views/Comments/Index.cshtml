@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MoshaverDataLayer.Model.Comment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div id="comment">
+    @Html.Partial("_Index", Model)
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $(document).on("click", "#contentPager a[href]", function () {
+                $.ajax({
+                    url: $(this).attr("href"),
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#comment').html(result);
+                    }
+                });
+                return false;
+            });
+
+
+
+        });
+</script>

@@ -1,0 +1,220 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
+
+    <!-- App Favicon -->
+    <link rel="shortcut icon" href="~/Areas/Admin/assets/images/favicon.ico">
+
+    <!-- App title -->
+    <title>مدیریت املاک</title>
+        <!-- App CSS -->
+     @Styles.Render("~/Content/myadmincss") 
+    @Styles.Render("~/Content/myadminDatePersiancss")
+
+    <script src="~/Areas/Admin/assets/js/modernizr.min.js"></script>
+
+</head>
+
+
+<body class="fixed-left">
+
+    <!-- Begin page -->
+    <div id="wrapper">
+
+        <!-- Top Bar Start -->
+        <div class="topbar">
+
+            <!-- LOGO -->
+            <div class="topbar-left"style="">
+             
+            </div>
+
+            <!-- Button mobile view to collapse sidebar menu -->
+            <div class="navbar navbar-default" role="navigation"style="">
+                <div class="container">
+
+                    <!-- Page title -->
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>
+                            <button class="button-menu-mobile open-left">
+                                <i class="zmdi zmdi-menu"></i>
+                            </button>
+                        </li>
+                  
+                    </ul>
+
+                    <!-- Right(Notification and Searchbox -->
+             
+
+                </div><!-- end container -->
+            </div><!-- end navbar -->
+        </div>
+        <!-- Top Bar End -->
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left side-menu"style="font-size: large;color:black">
+            <div class="sidebar-inner slimscrollleft">
+
+                <!-- User -->
+                <div class="user-box">
+                 
+                    <ul class="list-inline">
+                        <li>
+                            <a data-toggle="tooltip" title="خروج"data-placement="bottom"href="/Account/Signout"style="color:#333333"><span class="fa fa-sign-out fa-2x"style="color: #00ceff;; "></span></a>
+
+                        </li>
+                        <li>
+                            <a data-toggle="tooltip" title="صفحه اصلی سایت"data-placement="bottom"href="/"style="color:#333333"><span class="fa fa-eye fa-2x"style="color: #00ceff;; "></span></a>
+                        </li>
+                        <li>
+                            <a  adata-toggle="tooltip" title="تغییررمزعبور"data-placement="bottom" href="/Admin/Default/ChangePassword"style="color:#333333"><span class="fa fa-key fa-2x"style="color: #00ceff;; "></span></a>
+
+                        </li>
+                    </ul>
+                
+                </div>
+                <!-- End User -->
+                <!--- Sidemenu -->
+                <div id="sidebar-menu" style="">
+                    <ul>                 
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa  fa-user"style="color: blue; "></i> <span> ورودی های کاربر </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/ApplicationUsers/index">کاربران</a></li>
+                            </ul>
+                        </li>                                  
+                                    
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="zmdi zmdi-invert-colors"style="color: blue; "></i> <span> ورودی های ملک </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/Melks/index">ملک ها</a></li>                          
+                                <li><a href="/Admin/Cities/index">شهر ها</a></li>
+                                <li><a href="/Admin/TypeCustumers/index">نوع مشتری ها</a></li>                            
+                                <li><a href="/Admin/TypeGardads/index">نوع قراردها</a></li>
+                                <li><a href="/Admin/TypeMahdodes/index">محدوده ها</a></li>
+                                <li><a href="/Admin/TypeMelks/index">نوع ملک ها</a></li>
+                                <li><a href="/Admin/TypeSanads/index">نوع سندها</a></li>
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa  fa-desktop"style="color: blue; "></i> <span> ورودی های منو </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/Menus/index">منو ها</a></li>
+                             
+                               
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa  fa-codepen waves-effect"style="color: blue; "></i> <span> ورودی های اسلایدر</span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/Sliders/index">اسلایدر ها</a></li>
+
+
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa  fa-file-image-o waves-effect"style="color: blue; font-size: x-large;"></i> <span> ورودی های برند</span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/Brands/index">برند ها</a></li>
+
+
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-commenting-o  (alias) waves-effect"style="color: blue; "></i> <span> ورودی های نظرات</span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/Comments/index">نظر ها</a></li>
+
+
+                            </ul>
+                        </li>
+
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa  fa-cogs waves-effect"style="color: blue; "></i> <span> ورودی های اطلاعات</span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/Settings/index"> اطلاعات</a></li>
+                                <li><a href="/Admin/UsualQuestions/index"> سوالات متداول</a></li>
+
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa fa-percent waves-effect"style="color: blue; "></i> <span> ورودی های شبکه ها</span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/Socials/index"> شبکه های اجتماعی</a></li>
+
+
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa  fa-diamond"style="color: blue; "></i> <span> ورودی های تبلیغاتی</span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="/Admin/Advertises/index"> تبلیغات ها</a></li>
+
+
+                            </ul>
+                        </li>
+                
+
+
+
+                
+
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- Sidebar -->
+                <div class="clearfix"></div>
+
+            </div>
+
+        </div>
+        <!-- Left Sidebar End -->
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="content-page">
+            <!-- Start content -->
+            <div class="content"style="">
+                <div class="container">
+
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                    <!-- End row -->
+
+                </div> <!-- container -->
+
+            </div> <!-- content -->
+
+            <footer class="footer">
+             مدیریت املاک ©.
+            </footer>
+
+        </div>
+        <!-- End content-page -->
+        <!-- ============================================================== -->
+        <!-- End Right content here -->
+        <!-- ============================================================== -->
+    
+
+    </div>
+    <!-- END wrapper -->
+
+
+
+    <script>
+            var resizefunc = [];
+    </script>
+
+ 
+@Scripts.Render("~/Content/myadminjs")
+    @Scripts.Render("~/Content/myadminDatePersianjs")
+@RenderSection("scripts", false)
+</body>
+</html>
